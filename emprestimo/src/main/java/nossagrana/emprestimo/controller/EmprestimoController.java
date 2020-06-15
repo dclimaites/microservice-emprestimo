@@ -5,6 +5,7 @@ import nossagrana.emprestimo.dto.EmprestimoDTO;
 import nossagrana.emprestimo.dto.SolicitarEmprestimoDTO;
 import nossagrana.emprestimo.service.EmprestimoService;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,9 +20,10 @@ public class EmprestimoController {
         this.service = service;
     }
 
-    @GetMapping
-    public List<EmprestimoDTO> listarTodos() {
-        return this.service.getAll();
+    @GetMapping(value = "{emailUsuario}")
+    public List<EmprestimoDTO> listarTodos(@PathVariable String emailUsuario) {
+        List<EmprestimoDTO> emprestimos = this.service.findByEmail(emailUsuario);
+        return emprestimos;
     }
 
     @PostMapping
