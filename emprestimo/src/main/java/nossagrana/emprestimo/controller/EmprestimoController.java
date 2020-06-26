@@ -20,8 +20,8 @@ public class EmprestimoController {
         this.service = service;
     }
 
-    @GetMapping(value = "{emailUsuario}")
-    public List<EmprestimoDTO> listarTodos(@PathVariable String emailUsuario) {
+    @GetMapping()
+    public List<EmprestimoDTO> listarTodos(@RequestParam String emailUsuario) {
         List<EmprestimoDTO> emprestimos = this.service.findByEmail(emailUsuario);
         return emprestimos;
     }

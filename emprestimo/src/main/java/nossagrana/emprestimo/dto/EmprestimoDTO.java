@@ -74,46 +74,6 @@ public class EmprestimoDTO {
     public EmprestimoDTO() {
     }
 
-//    public double getMontante() {
-//        return montante;
-//    }
-//
-//    public void setMontante(double montante) {
-//        this.montante = montante;
-//    }
-
-//    public ZonedDateTime getDataVencimento() {
-//        return dataVencimento;
-//    }
-//
-//    public void setDataVencimento(ZonedDateTime dataVencimento) {
-//        this.dataVencimento = dataVencimento;
-//    }
-//
-//    public ZonedDateTime getDataBase() {
-//        return dataBase;
-//    }
-//
-//    public void setDataBase(ZonedDateTime dataBase) {
-//        this.dataBase = dataBase;
-//    }
-//
-//    public double getTaxaJuros() {
-//        return taxaJuros;
-//    }
-//
-//    public void setTaxaJuros(double taxaJuros) {
-//        this.taxaJuros = taxaJuros;
-//    }
-//
-//    public double getTaxaCET() {
-//        return taxaCET;
-//    }
-//
-//    public void setTaxaCET(double taxaCET) {
-//        this.taxaCET = taxaCET;
-//    }
-
     private ZonedDateTime convertToZonedDateTime(LocalDate data) {
         if(data != null) {
             return data.atStartOfDay(ZoneId.systemDefault());
