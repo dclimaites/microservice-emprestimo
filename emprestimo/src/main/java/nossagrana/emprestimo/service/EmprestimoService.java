@@ -11,6 +11,7 @@ public interface EmprestimoService {
     List<EmprestimoDTO> getAll();
     void create(SolicitarEmprestimoDTO solicitarEmprestimoDTO);
     EmprestimoDTO findById(String id);
+    List<EmprestimoDTO> findByEmail(String email);
     EmprestimoDTO update(String id, AtualizarEmprestimoDTO atualizarEmprestimoDTO);
     void delete(String id);
 }

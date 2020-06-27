@@ -11,6 +11,8 @@ public class Emprestimo {
     private LocalDate dataVencimento;
     private LocalDate dataBase;
     private double taxaJuros;
+    private String emailUsuario;
+    private double taxaCET;
 
     public Emprestimo() {}
 
@@ -24,6 +26,7 @@ public class Emprestimo {
     public Emprestimo(SolicitarEmprestimoDTO solicitarEmprestimoDTO) {
         this.montante = solicitarEmprestimoDTO.getMontante();
         this.dataVencimento = solicitarEmprestimoDTO.getDataVencimento().toLocalDate();
+        this.emailUsuario = solicitarEmprestimoDTO.getEmailUsuario();
         this.dataBase = LocalDate.now();
         this.taxaJuros = 0.40;
     }
@@ -62,5 +65,17 @@ public class Emprestimo {
 
     public double getTaxaCET() {
         return taxaJuros + 0.4;
+    }
+
+    public void getTaxaCET(double taxaCET) {
+
+    }
+
+    public String getEmailUsuario() {
+        return emailUsuario;
+    }
+
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
     }
 }

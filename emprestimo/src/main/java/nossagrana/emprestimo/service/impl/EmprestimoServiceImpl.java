@@ -43,6 +43,19 @@ public class EmprestimoServiceImpl implements EmprestimoService {
         return new EmprestimoDTO(getEmprestimo(id));
     }
 
+    @Override
+    public List<EmprestimoDTO> findByEmail(String email) {
+        List<Emprestimo> emprestimos = this.emprestimoRepositorio.findAllByEmail(email);
+        List<EmprestimoDTO> retorno;
+        try {
+            retorno = emprestimos.stream().map(EmprestimoDTO::new).collect(Collectors.toList());
+        }
+         catch (Exception e) {
+            throw e;
+         }
+        return retorno;
+    }
+
 
     @Override
     public EmprestimoDTO update(String id, AtualizarEmprestimoDTO atualizarEmprestimoDTO) {

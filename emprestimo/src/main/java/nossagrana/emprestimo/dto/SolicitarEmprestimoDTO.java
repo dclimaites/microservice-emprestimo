@@ -5,10 +5,12 @@ import java.time.ZonedDateTime;
 public class SolicitarEmprestimoDTO {
     private double montante;
     private ZonedDateTime dataVencimento;
+    private String emailUsuario;
 
-    public SolicitarEmprestimoDTO(double montante, ZonedDateTime dataVencimento) {
+    public SolicitarEmprestimoDTO(double montante, ZonedDateTime dataVencimento, String emailUsuario) {
         this.montante = montante;
         this.dataVencimento = dataVencimento;
+        this.emailUsuario = emailUsuario;
     }
 
     public SolicitarEmprestimoDTO() {
@@ -29,4 +31,13 @@ public class SolicitarEmprestimoDTO {
     public void setDataVencimento(ZonedDateTime dataVencimento) {
         this.dataVencimento = dataVencimento;
     }
+
+    public String getEmailUsuario() {
+        return emailUsuario;
+    }
+
+    public void setEmailUsuario(String emailUsuario) {
+        this.emailUsuario = emailUsuario;
+    }
+
 }
