@@ -38,7 +38,7 @@ public class EmprestimoController {
                 .collect(Collectors.toList());
     }
 
-    @ApiOperation(value = "Solicita um novo empréstimos.")
+    @ApiOperation(value = "Solicita um novo empréstimo.")
     @ApiResponses(value = {
             @ApiResponse(code = 201, message = "Emprestimo criado com sucesso.")
          })

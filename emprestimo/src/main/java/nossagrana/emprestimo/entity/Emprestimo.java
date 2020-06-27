@@ -1,10 +1,13 @@
 package nossagrana.emprestimo.entity;
 
 import nossagrana.emprestimo.dto.SolicitarEmprestimoDTO;
+import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 
 public class Emprestimo {
+    @Id
+    private String id;
     private double montante;
     private LocalDate dataVencimento;
     private LocalDate dataBase;
@@ -27,6 +30,14 @@ public class Emprestimo {
         this.emailUsuario = solicitarEmprestimoDTO.getEmailUsuario();
         this.dataBase = LocalDate.now();
         this.taxaJuros = 0.40;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public double getMontante() {
@@ -61,19 +72,19 @@ public class Emprestimo {
         this.taxaJuros = taxaJuros;
     }
 
-    public double getTaxaCET() {
-        return taxaJuros + 0.4;
-    }
-
-    public void getTaxaCET(double taxaCET) {
-
-    }
-
     public String getEmailUsuario() {
         return emailUsuario;
     }
 
     public void setEmailUsuario(String emailUsuario) {
         this.emailUsuario = emailUsuario;
+    }
+
+    public double getTaxaCET() {
+        return taxaCET;
+    }
+
+    public void setTaxaCET(double taxaCET) {
+        this.taxaCET = taxaCET;
     }
 }
