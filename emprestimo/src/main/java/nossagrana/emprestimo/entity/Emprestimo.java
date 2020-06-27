@@ -3,8 +3,6 @@ package nossagrana.emprestimo.entity;
 import nossagrana.emprestimo.dto.SolicitarEmprestimoDTO;
 
 import java.time.LocalDate;
-import java.time.ZonedDateTime;
-import java.util.Date;
 
 public class Emprestimo {
     private double montante;
