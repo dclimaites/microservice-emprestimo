@@ -3,14 +3,17 @@ package nossagrana.emprestimo.dto;
 import java.time.ZonedDateTime;
 
 public class AtualizarEmprestimoDTO {
+    private ZonedDateTime dataVencimento;
+    private double montante;
+
+    public AtualizarEmprestimoDTO(ZonedDateTime dataVencimento) {
+        this.dataVencimento = dataVencimento;
+    }
 
     public AtualizarEmprestimoDTO(ZonedDateTime dataVencimento, double montante) {
         this.dataVencimento = dataVencimento;
         this.montante = montante;
     }
-
-    private ZonedDateTime dataVencimento;
-    private double montante;
 
     public ZonedDateTime getDataVencimento() {
         return dataVencimento;
