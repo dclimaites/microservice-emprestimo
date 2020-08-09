@@ -13,6 +13,6 @@ RUN mvn package
 # Package stage
 #
 FROM openjdk:8-jdk-alpine
-COPY --from=build /home/app/target/*.jar /usr/local/lib/demo.jar
-EXPOSE 8080
-ENTRYPOINT ["java","-jar","/usr/local/lib/demo.jar"]
+COPY --from=build /home/app/target/*.jar /usr/local/lib/emprestimo.jar
+EXPOSE 8081
+ENTRYPOINT ["java","-jar","/usr/local/lib/emprestimo.jar"]

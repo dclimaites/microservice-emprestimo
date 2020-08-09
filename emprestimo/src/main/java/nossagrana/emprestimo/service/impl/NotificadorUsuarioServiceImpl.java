@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import nossagrana.emprestimo.entity.ItemFilaNotificacaoUsuario;
 import nossagrana.emprestimo.service.NotificadorUsuarioService;
 import nossagrana.emprestimo.support.CloudAmqpConnection;
+import nossagrana.emprestimo.support.ConsultaUsuarioService;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
@@ -18,21 +19,30 @@ public class NotificadorUsuarioServiceImpl implements NotificadorUsuarioService 
     private String queueName;
     private String exchange;
     private RabbitTemplate template;
+    private ConsultaUsuarioService consultaUsuarioService;
 
     public NotificadorUsuarioServiceImpl(
             CloudAmqpConnection cloudAmqpConnection,
             @Value("${notificacao-usuario.cloudamqp.queue-name}") String queueName,
-            @Value("${notificacao-usuario.cloudamqp.exchange}") String exchange
+            @Value("${notificacao-usuario.cloudamqp.exchange}") String exchange,
+            ConsultaUsuarioService consultaUsuarioService
     ) {
         this.template = new RabbitTemplate(cloudAmqpConnection.getConnection());
         this.queueName = queueName;
         this.exchange = exchange;
+        this.consultaUsuarioService = consultaUsuarioService;
         criaFilaCasoNecessario(queueName, exchange,cloudAmqpConnection);
     }
 
     @Override
     public void notificaUsuarioCriacaoEmprestimo(String email) {
-        ItemFilaNotificacaoUsuario itemFilaNotificacaoUsuario = new ItemFilaNotificacaoUsuario(email, "Dino da Silva Sauro");
+        String nomeUsuario = consultaUsuarioService.consultaNomeUsuario(email);
+
+        if (nomeUsuario == null){
+            return;
+        }
+
+        ItemFilaNotificacaoUsuario itemFilaNotificacaoUsuario = new ItemFilaNotificacaoUsuario(email, nomeUsuario);
 
         ObjectMapper objectMapper = new ObjectMapper();
         try {
