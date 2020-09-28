@@ -5,6 +5,7 @@ import nossagrana.emprestimo.dto.SolicitarEmprestimoDTO;
 import nossagrana.emprestimo.entity.Emprestimo;
 import nossagrana.emprestimo.repository.EmprestimoRepository;
 import nossagrana.emprestimo.service.EmprestimoService;
+import nossagrana.emprestimo.service.NotificadorUsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -14,22 +15,29 @@ import java.util.List;
 @Service
 public class EmprestimoServiceImpl implements EmprestimoService {
     private EmprestimoRepository emprestimoRepositorio;
+    private NotificadorUsuarioService notificadorUsuarioService;
 
-    public EmprestimoServiceImpl(EmprestimoRepository emprestimoRepositorio) {
+    public EmprestimoServiceImpl(
+            EmprestimoRepository emprestimoRepositorio,
+            NotificadorUsuarioService notificadorUsuarioService
+    ) {
         this.emprestimoRepositorio = emprestimoRepositorio;
+        this.notificadorUsuarioService = notificadorUsuarioService;
     }
 
     @Override
     public List<Emprestimo> getAll() {
         return this.emprestimoRepositorio.findAll();
-
-
     }
 
     @Override
     public Emprestimo create(SolicitarEmprestimoDTO solicitarEmprestimoDTO) {
         Emprestimo emprestimo = new Emprestimo(solicitarEmprestimoDTO);
-        return emprestimoRepositorio.save(emprestimo);
+        Emprestimo savedEmprestimo = emprestimoRepositorio.save(emprestimo);
+
+        notificadorUsuarioService.notificaUsuarioCriacaoEmprestimo(solicitarEmprestimoDTO.getEmailUsuario());
+
+        return savedEmprestimo;
     }
 
     @Override
